@@ -1,0 +1,29 @@
+[Oumayma@localhost ~]$ sudo su
+
+[root@localhost Oumayma]# systemctl start docker
+[root@localhost Oumayma]# systemctl status docker
+
+[root@localhost Oumayma]# docker images
+[root@localhost Oumayma]# docker ps -l
+[root@localhost Oumayma]# docker ps -a
+[root@localhost Oumayma]# docker network ls
+
+[root@localhost Oumayma]# mkdir orchestration
+[root@localhost Oumayma]# cd orchestration
+[root@localhost orchestration]# vim Dockerfile
+[root@localhost orchestration]# docker build --rm -t clatest-systemd .
+[root@localhost orchestration]# docker images
+
+[root@localhost orchestration]# mkdir systemd-sshd
+[root@localhost orchestration]# cd systemd-sshd
+[root@localhost systemd-sshd]# vim Dockerfile
+[root@localhost systemd-sshd]# docker build --rm -t clatest-systemd-sshd .
+[root@localhost systemd-sshd]# docker images
+
+[root@localhost systemd-sshd]# cd ..
+[root@localhost orchestration]# docker compose up
+[root@localhost orchestration]# docker ps -a
+[root@localhost orchestration]# docker network ls
+
+[root@localhost orchestration]# docker exec -d a49476d7c7f1 bash -c "echo 'nameserver 8.8.8.8' > /etc/resolv.conf"
+[root@localhost orchestration]# docker exec -it a49476d7c7f1 bash
