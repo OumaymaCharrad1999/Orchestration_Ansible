@@ -1,55 +1,63 @@
 version: "3"
-
 services:
-  centos8-build-test:
-    image: centos:latest
-    container_name: centos8-build-test 
+  clatest-build-test:
+    image: clatest-systemd-sshd
+    container_name: clatest_build_test
     stdin_open: true
     tty: true
     privileged: true
     ports:
       - "8082:8082"
+    tmpfs:
+      - /run
+      - /tmp
     networks:
       orchestrationNetwork:
         ipv4_address: 192.168.10.2
     volumes:
-      - /var/lib/docker/volumes/centos8_build_test_home/_data:/var/centos8_build_test_home
+      - /var/lib/docker/volumes/clatest_build_test_home/_data:/var/clatest_build_test_home
       - /usr/bin/docker:/usr/bin/docker
       - /var/run/docker.sock:/var/run/docker.sock
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     restart: always
 
-  centos8-preprod:
-    image: centos:latest
-    container_name: centos8-preprod
+  clatest-preprod:
+    image: clatest-systemd-sshd
+    container_name: clatest_preprod
     stdin_open: true
     tty: true
     privileged: true
     ports:
       - "8083:8083"
+    tmpfs:
+      - /run
+      - /tmp
     networks:
       orchestrationNetwork:
         ipv4_address: 192.168.10.3
     volumes:
-      - /var/lib/docker/volumes/centos8_preprod_home/_data:/var/centos8_preprod_home
+      - /var/lib/docker/volumes/clatest_preprod_home/_data:/var/clatest_preprod_home
       - /usr/bin/docker:/usr/bin/docker
       - /var/run/docker.sock:/var/run/docker.sock
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     restart: always
-
-  centos8-prod:
-    image: centos:latest
-    container_name: centos8-prod
+    
+  clatest-prod:
+    image: clatest-systemd-sshd
+    container_name: clatest_prod
     stdin_open: true
     tty: true
     privileged: true
     ports:
       - "8084:8084"
+    tmpfs:
+      - /run
+      - /tmp
     networks:
       orchestrationNetwork:
         ipv4_address: 192.168.10.4
     volumes:
-      - /var/lib/docker/volumes/centos8_prod_home/_data:/var/centos8_prod_home
+      - /var/lib/docker/volumes/clatest_prod_home/_data:/var/clatest_prod_home
       - /usr/bin/docker:/usr/bin/docker
       - /var/run/docker.sock:/var/run/docker.sock
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
