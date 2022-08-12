@@ -1,3 +1,4 @@
+########## Step 1 : Configure Centos container to support SSH in Docker ##########
 [Oumayma@localhost ~]$ sudo systemctl start docker
 [sudo] password for Oumayma:
 [Oumayma@localhost ~]$ sudo systemctl status docker
@@ -12,11 +13,15 @@
 [Oumayma@localhost ~]$ mkdir orchestration
 [Oumayma@localhost ~]$ cd orchestration
 [Oumayma@localhost orchestration]$ vim Dockerfile
+### Build the image from the Dockerfile ###
 [Oumayma@localhost orchestration]$ docker build --rm -t centos-ssh .
 [Oumayma@localhost orchestration]$ docker images
+### Deploy the container ####
 [Oumayma@localhost orchestration]$ docker run -d -P --name test_centos_ssh centos-ssh
 [Oumayma@localhost orchestration]$ docker ps -l
+### Locate the IP address of the running container ###
 [Oumayma@localhost orchestration]$ docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' test_centos_ssh
+### SSH into the running container ###
 [Oumayma@localhost orchestration]$ ssh root@172.17.0.4
 [root@f23690f52790 ~]# exit
 
@@ -34,6 +39,39 @@
 [Oumayma@localhost orchestration]$ docker exec -it 371a0f8e8db5 bash
 
 
+### Log into the Docker Hub ###
 [Oumayma@localhost orchestration]$ docker login --username=oumaymacharrad
+### Tag the image ###
 [Oumayma@localhost orchestration]$ docker tag d104aad35156 oumaymacharrad/centos-ssh:latest
+### Push the image to the repository created ###
 [Oumayma@localhost orchestration]$ docker push oumaymacharrad/centos-ssh
+
+
+
+
+
+########## Step 2 : Install a Runner ##########
+### Download the binary for your system ###
+[Oumayma@localhost ~]$ sudo curl -L --output /usr/local/bin/gitlab-runner "https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-linux-amd64"
+
+
+[Oumayma@localhost ~]$ cd /usr/local/bin
+[Oumayma@localhost bin]$ ls
+### Give it permission to execute ###
+[Oumayma@localhost bin]$ sudo chmod +x /usr/local/bin/gitlab-runner
+[Oumayma@localhost bin]$ ls
+
+
+### Create a GitLab Runner user ###
+[Oumayma@localhost bin]$ sudo useradd --comment 'GitLab Runner' --create-home gitlab-runner --shell /bin/bash
+
+
+### Install and run as a service ###
+[Oumayma@localhost bin]$ sudo ./gitlab-runner install --user=gitlab-runner --working-directory=/home/gitlab-runner
+[Oumayma@localhost bin]$ sudo ./gitlab-runner start
+[Oumayma@localhost bin]$ sudo ./gitlab-runner status
+
+
+### Register a Runner ###
+[Oumayma@localhost bin]$ sudo ./gitlab-runner register
+[Oumayma@localhost bin]$ sudo ./gitlab-runner verify
