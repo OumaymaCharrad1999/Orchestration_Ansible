@@ -1,8 +1,8 @@
 version: "3"
 services:
-  clatest-build-test:
-    image: clatest-systemd-sshd
-    container_name: clatest_build_test
+  centos-build-test:
+    image: centos-ssh
+    container_name: centos_build_test
     stdin_open: true
     tty: true
     privileged: true
@@ -13,17 +13,17 @@ services:
       - /tmp
     networks:
       orchestrationNetwork:
-        ipv4_address: 192.168.10.2
+        ipv4_address: 192.168.20.2
     volumes:
-      - /var/lib/docker/volumes/clatest_build_test_home/_data:/var/clatest_build_test_home
+      - /var/lib/docker/volumes/centos_build_test_home/_data:/var/centos_build_test_home
       - /usr/bin/docker:/usr/bin/docker
       - /var/run/docker.sock:/var/run/docker.sock
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     restart: always
 
-  clatest-preprod:
-    image: clatest-systemd-sshd
-    container_name: clatest_preprod
+  centos-preprod:
+    image: centos-ssh
+    container_name: centos_preprod
     stdin_open: true
     tty: true
     privileged: true
@@ -34,17 +34,17 @@ services:
       - /tmp
     networks:
       orchestrationNetwork:
-        ipv4_address: 192.168.10.3
+        ipv4_address: 192.168.20.3
     volumes:
-      - /var/lib/docker/volumes/clatest_preprod_home/_data:/var/clatest_preprod_home
+      - /var/lib/docker/volumes/centos_preprod_home/_data:/var/centos_preprod_home
       - /usr/bin/docker:/usr/bin/docker
       - /var/run/docker.sock:/var/run/docker.sock
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     restart: always
-    
-  clatest-prod:
-    image: clatest-systemd-sshd
-    container_name: clatest_prod
+  
+  centos-prod:
+    image: centos-ssh
+    container_name: centos_prod
     stdin_open: true
     tty: true
     privileged: true
@@ -55,9 +55,9 @@ services:
       - /tmp
     networks:
       orchestrationNetwork:
-        ipv4_address: 192.168.10.4
+        ipv4_address: 192.168.20.4
     volumes:
-      - /var/lib/docker/volumes/clatest_prod_home/_data:/var/clatest_prod_home
+      - /var/lib/docker/volumes/centos_prod_home/_data:/var/centos_prod_home
       - /usr/bin/docker:/usr/bin/docker
       - /var/run/docker.sock:/var/run/docker.sock
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
@@ -68,5 +68,5 @@ networks:
     driver: bridge
     ipam:
      config:
-       - subnet: 192.168.10.0/16
-         gateway : 192.168.10.1
+       - subnet: 192.168.20.0/16
+         gateway : 192.168.20.1
