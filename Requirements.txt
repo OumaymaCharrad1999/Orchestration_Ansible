@@ -1,29 +1,34 @@
-[Oumayma@localhost ~]$ sudo su
+[Oumayma@localhost ~]$ sudo systemctl start docker
+[sudo] password for Oumayma:
+[Oumayma@localhost ~]$ sudo systemctl status docker
 
-[root@localhost Oumayma]# systemctl start docker
-[root@localhost Oumayma]# systemctl status docker
 
-[root@localhost Oumayma]# docker images
-[root@localhost Oumayma]# docker ps -l
-[root@localhost Oumayma]# docker ps -a
-[root@localhost Oumayma]# docker network ls
+[Oumayma@localhost ~]$ docker images
+[Oumayma@localhost ~]$ docker ps -l
+[Oumayma@localhost ~]$ docker ps -a
+[Oumayma@localhost ~]$ docker network ls
 
-[root@localhost Oumayma]# mkdir orchestration
-[root@localhost Oumayma]# cd orchestration
-[root@localhost orchestration]# vim Dockerfile
-[root@localhost orchestration]# docker build --rm -t clatest-systemd .
-[root@localhost orchestration]# docker images
 
-[root@localhost orchestration]# mkdir systemd-sshd
-[root@localhost orchestration]# cd systemd-sshd
-[root@localhost systemd-sshd]# vim Dockerfile
-[root@localhost systemd-sshd]# docker build --rm -t clatest-systemd-sshd .
-[root@localhost systemd-sshd]# docker images
+[Oumayma@localhost ~]$ mkdir orchestration
+[Oumayma@localhost ~]$ cd orchestration
+[Oumayma@localhost orchestration]$ vim Dockerfile
+[Oumayma@localhost orchestration]$ docker build --rm -t centos-ssh .
+[Oumayma@localhost orchestration]$ docker images
+[Oumayma@localhost orchestration]$ docker run -d -P --name test_centos_ssh centos-ssh
+[Oumayma@localhost orchestration]$ docker ps -l
+[Oumayma@localhost orchestration]$ docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' test_centos_ssh
+[Oumayma@localhost orchestration]$ ssh root@172.17.0.4
+[root@f23690f52790 ~]# exit
 
-[root@localhost systemd-sshd]# cd ..
-[root@localhost orchestration]# docker compose up
-[root@localhost orchestration]# docker ps -a
-[root@localhost orchestration]# docker network ls
 
-[root@localhost orchestration]# docker exec -d a49476d7c7f1 bash -c "echo 'nameserver 8.8.8.8' > /etc/resolv.conf"
-[root@localhost orchestration]# docker exec -it a49476d7c7f1 bash
+[Oumayma@localhost orchestration]$ vim docker-compose.yml
+[Oumayma@localhost orchestration]$ docker compose up
+[Oumayma@localhost orchestration]$ docker ps -a
+[Oumayma@localhost orchestration]$ docker network ls
+[Oumayma@localhost orchestration]$ docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' centos_build_test
+[Oumayma@localhost orchestration]$ ssh root@192.168.20.2
+[root@371a0f8e8db5 ~]# exit
+
+
+[Oumayma@localhost orchestration]$ docker exec -d 371a0f8e8db5 bash -c "echo 'nameserver 8.8.8.8' > /etc/resolv.conf"
+[Oumayma@localhost orchestration]$ docker exec -it 371a0f8e8db5 bash
