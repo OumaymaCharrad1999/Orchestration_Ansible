@@ -32,3 +32,8 @@
 
 [Oumayma@localhost orchestration]$ docker exec -d 371a0f8e8db5 bash -c "echo 'nameserver 8.8.8.8' > /etc/resolv.conf"
 [Oumayma@localhost orchestration]$ docker exec -it 371a0f8e8db5 bash
+
+
+[Oumayma@localhost orchestration]$ docker login --username=oumaymacharrad
+[Oumayma@localhost orchestration]$ docker tag d104aad35156 oumaymacharrad/centos-ssh:latest
+[Oumayma@localhost orchestration]$ docker push oumaymacharrad/centos-ssh
