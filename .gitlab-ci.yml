@@ -9,7 +9,6 @@ build-job:       # This job runs in the build stage, which runs first.
     - shell
   script:
     - echo "Compiling the code..."
-    - mkdir test
     - echo "Compile complete."
 
 test-job:   # This job runs in the test stage.
