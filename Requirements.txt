@@ -75,3 +75,62 @@
 ### Register a Runner ###
 [Oumayma@localhost bin]$ sudo ./gitlab-runner register
 [Oumayma@localhost bin]$ sudo ./gitlab-runner verify
+
+
+
+
+
+########## Step 3 : Create a .gitlab-ci.yml file and view the status of the pipeline and jobs ##########
+
+
+
+
+
+########## Step 4 : Create and run Ansible Playbook ##########
+### Create my first Ansible Playbook ###
+[Oumayma@localhost ~]$ cd /etc/ansible
+[Oumayma@localhost ansible]$ vim my_first_playbook.yml
+[Oumayma@localhost ansible]$ ansible-playbook my_first_playbook.yml
+
+
+### Keys based SSH authentication with nodes ###
+[Oumayma@localhost ansible]$ sudo su
+[root@localhost ansible]# ssh-keygen -t rsa -b 4096
+
+
+### Copy the SSH Key to the remote servers ###
+[root@localhost ansible]# ssh-copy-id root@192.168.20.2
+[root@localhost ansible]# ssh-copy-id root@192.168.20.3
+[root@localhost ansible]# ssh-copy-id root@192.168.20.4
+
+
+### Create inventory of remote hosts ###
+[root@localhost ansible]# vim hosts
+
+
+### Verify the connectivity from Ansible server to remote servers ###
+[root@localhost ansible]# ansible -m ping 192.168.20.2
+[root@localhost ansible]# ansible -m ping 192.168.20.3
+[root@localhost ansible]# ansible -m ping 192.168.20.4
+### Ping all configured hosts ###
+[root@localhost ansible]# ansible all -m ping
+
+
+### Execute Remote Commands ###
+[root@localhost ansible]# ansible -m command -a 'df -h' 192.168.20.2
+[root@localhost ansible]# ansible -m command -a 'uptime' 192.168.20.2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
