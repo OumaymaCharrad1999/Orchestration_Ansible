@@ -1,0 +1,40 @@
+stages:          # List of stages for jobs, and their order of execution.
+  - build
+  - test
+  - deploy
+
+build-job:       # This job runs in the build stage, which runs first.
+  stage: build
+  tags:
+    - shell
+  script:
+    - echo "Compiling the code..."
+    - echo "Compile complete."
+
+test-job:   # This job runs in the test stage.
+  stage: test    # It only starts when the job in the build stage completes successfully.
+  tags:
+    - shell
+  script:
+    - echo "Running tests... This will take about 30 seconds."
+    - sleep 30
+    - echo "Code coverage is 90%"
+
+preprod-deploy-job:      # This job runs in the deploy stage.
+  stage: deploy  # It only runs when job in the test stage complete successfully.
+  tags:
+    - shell
+  environment: production
+  script:
+    - echo "Deploying application..."
+    - echo "Application successfully deployed."
+
+prod-deploy-job:      # This job also runs in the deploy stage.
+  stage: deploy  
+  tags:
+    - shell
+  environment: production
+  when: manual
+  script:
+    - echo "Deploying application..."
+    - echo "Application successfully deployed."
