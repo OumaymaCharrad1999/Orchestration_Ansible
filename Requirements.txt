@@ -119,18 +119,3 @@
 ### Execute Remote Commands ###
 [root@localhost ansible]# ansible -m command -a 'df -h' 192.168.20.2
 [root@localhost ansible]# ansible -m command -a 'uptime' 192.168.20.2
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
