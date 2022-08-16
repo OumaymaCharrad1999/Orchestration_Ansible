@@ -122,6 +122,7 @@
 [root@localhost ansible]# ansible -m command -a 'df -h' my_nodes
 [root@localhost ansible]# ansible -m command -a 'uptime' my_nodes
 
+
 ### Create Ansible Playbook to configure a host to run an Apache Web Server ###
 [root@localhost ansible]# vim httpd.yml
 [root@localhost ansible]# ansible-playbook -l 192.168.20.2 httpd.yml
