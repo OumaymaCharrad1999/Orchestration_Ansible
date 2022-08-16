@@ -119,7 +119,8 @@
 ### Execute Remote Commands ###
 [root@localhost ansible]# ansible -m command -a 'df -h' 192.168.20.2
 [root@localhost ansible]# ansible -m command -a 'uptime' 192.168.20.2
-
+[root@localhost ansible]# ansible -m command -a 'df -h' my_nodes
+[root@localhost ansible]# ansible -m command -a 'uptime' my_nodes
 
 ### Create Ansible Playbook to configure a host to run an Apache Web Server ###
 [root@localhost ansible]# vim httpd.yml
