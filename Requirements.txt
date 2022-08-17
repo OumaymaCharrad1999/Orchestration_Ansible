@@ -126,3 +126,42 @@
 ### Create Ansible Playbook to configure a host to run an Apache Web Server ###
 [root@localhost ansible]# vim httpd.yml
 [root@localhost ansible]# ansible-playbook -l 192.168.20.2 httpd.yml
+
+
+
+
+
+[Oumayma@localhost ~]$ docker run -dit --name test_clatest_ssh --privileged centos /usr/sbin/init
+[Oumayma@localhost ~]$ docker ps -a
+[Oumayma@localhost ~]$ docker exec -it 843a69dba431 bash
+[root@843a69dba431 /]# ps aux
+[root@843a69dba431 /]# cd /etc/yum.repos.d
+[root@843a69dba431 yum.repos.d]# ls
+[root@843a69dba431 yum.repos.d]# vi CentOS-Linux-AppStream.repo 
+[root@843a69dba431 yum.repos.d]# vi CentOS-Linux-BaseOS.repo 
+[root@843a69dba431 yum.repos.d]# cat /etc/resolv.conf
+[root@843a69dba431 yum.repos.d]# yum -y install openssh-server openssh-clients passwd net-tools
+[root@843a69dba431 yum.repos.d]# systemctl start sshd
+[root@843a69dba431 yum.repos.d]# systemctl status sshd
+[root@843a69dba431 yum.repos.d]# passwd root
+[root@843a69dba431 yum.repos.d]# yum -y install ncurses
+[root@843a69dba431 yum.repos.d]# clear
+[root@843a69dba431 yum.repos.d]# ifconfig
+[root@843a69dba431 yum.repos.d]# exit
+[Oumayma@localhost ~]$ sudo su
+[root@localhost Oumayma]# ssh-copy-id 172.17.0.7
+[root@localhost Oumayma]# ansible-playbook httpd.yml
+[root@localhost Oumayma]# ssh 172.17.0.7
+[root@843a69dba431 ~]# cd /var/www/html
+[root@843a69dba431 html]# ls
+index.html
+[root@843a69dba431 html]# cat index.html
+
+
+
+
+
+
+
+
+
