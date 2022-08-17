@@ -1,6 +1,6 @@
 ---
 - name: A simple playbook file
-  hosts: all
+  hosts: my_nodes
   tasks:
     - name: Print a sample message
       debug: 

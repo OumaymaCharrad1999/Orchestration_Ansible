@@ -1,0 +1,17 @@
+---
+- hosts: my_nodes
+  remote_user: root
+  tasks:
+  - name: Installing Latest version of Apache
+    package:
+      name: httpd
+      state: present
+
+  - name: Copying Web Pages
+    copy:
+      src: /etc/ansible/index.html
+      dest: /var/www/html/index.html
+  
+  - name: Start Apache Web Service
+    command: /usr/sbin/httpd
+    changed_when: false
