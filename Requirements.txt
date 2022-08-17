@@ -156,12 +156,3 @@
 [root@843a69dba431 html]# ls
 index.html
 [root@843a69dba431 html]# cat index.html
-
-
-
-
-
-
-
-
-
