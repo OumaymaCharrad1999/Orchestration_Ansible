@@ -128,9 +128,18 @@
 [root@localhost ansible]# ansible-playbook -l 192.168.20.2 httpd.yml
 
 
+### Create Ansible Playbook to collect server logs ###
+[root@localhost ansible]# vim journaux.yml
+[root@localhost ansible]# ansible-playbook journaux.yml
+[root@localhost ansible]# cd /tmp/logs
+[root@localhost logs]# ls
+[root@localhost logs]# tree
 
 
 
+
+
+########## Deploy a CentOS container image with systemd enabled ##########
 [Oumayma@localhost ~]$ docker run -dit --name test_clatest_ssh --privileged centos /usr/sbin/init
 [Oumayma@localhost ~]$ docker ps -a
 [Oumayma@localhost ~]$ docker exec -it 843a69dba431 bash
