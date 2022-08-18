@@ -1,0 +1,46 @@
+---
+- hosts: 172.17.0.3
+  remote_user: root
+  tasks:
+    - name: System Name
+      shell: uname
+      register: hello
+    - debug: msg="{{hello.stdout}}"
+    - debug: msg="{{hello.stderr}}"  
+
+    - name: Machine Hardware Name
+      shell: "uname -m"
+      register: hello
+    - debug: msg="{{hello.stdout}}"
+    - debug: msg="{{hello.stderr}}"
+
+    - name: CPU Information
+      shell: "lscpu"
+      register: hello
+    - debug: msg="{{hello.stdout}}"
+    - debug: msg="{{hello.stderr}}"
+
+    - name: PCI Devices Information
+      shell: "lspci"
+      register: hello
+    - debug: msg="{{hello.stdout}}"
+    - debug: msg="{{hello.stderr}}"
+
+    - name: File System Partitions
+      shell: "fdisk -l"
+      register: hello
+    - debug: msg="{{hello.stdout}}"
+    - debug: msg="{{hello.stderr}}"
+
+    - name: Disk Free
+      shell: "df -h"
+      register: hello
+    - debug: msg="{{hello.stdout}}"
+    - debug: msg="{{hello.stderr}}"
+
+    - name: Server Uptime
+      shell: "uptime"
+      register: hello
+    - debug: msg="{{hello.stdout}}"
+    - debug: msg="{{hello.stderr}}"
+      
