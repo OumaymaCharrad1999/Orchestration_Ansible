@@ -14,10 +14,9 @@
 ## blue.example.com
 ## 192.168.100.1
 ## 192.168.100.10
-192.168.20.2
-192.168.20.3
-192.168.20.4
-172.17.0.7
+172.17.0.2
+172.17.0.3
+172.17.0.4
 # Ex 2: A collection of hosts belonging to the 'webservers' group:
 
 ## [webservers]
@@ -26,9 +25,9 @@
 ## 192.168.1.100
 ## 192.168.1.110
 [my_nodes]
-192.168.20.2
-192.168.20.3
-192.168.20.4
+172.17.0.2
+172.17.0.3
+172.17.0.4
 # If you have multiple hosts following a pattern, you can specify
 # them like this:
 
