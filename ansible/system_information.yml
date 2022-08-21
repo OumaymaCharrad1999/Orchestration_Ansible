@@ -1,5 +1,5 @@
 ---
-- hosts: 172.17.0.3
+- hosts: my_nodes
   remote_user: root
   tasks:
     - name: System Name
