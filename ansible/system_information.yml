@@ -43,4 +43,4 @@
       register: hello
     - debug: msg="{{hello.stdout}}"
     - debug: msg="{{hello.stderr}}"
-      
+    
