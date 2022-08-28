@@ -1,5 +1,5 @@
 ---
-- hosts: 172.17.0.4
+- hosts: my_nodes
   remote_user: root
   gather_facts: no
   become: yes
