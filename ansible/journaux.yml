@@ -17,3 +17,4 @@
         src: "{{ item.path }}"
         dest: /tmp/logs
       with_items: "{{ _logs.files }}"
+
